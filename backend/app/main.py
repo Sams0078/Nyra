@@ -2,6 +2,11 @@ from fastapi import FastAPI
 
 from app.api.v1.router import api_router
 from app.core.config import settings
+from app.core.middleware import logging_middleware
+from app.core.exceptions import (
+    NYRAException,
+    nyra_exception_handler,
+)
 from app.core.logging import logger
 
 app = FastAPI(
@@ -9,6 +14,13 @@ app = FastAPI(
     version=settings.VERSION,
     description="Personal AI Companion"
 )
+
+app.add_exception_handler(
+    NYRAException,
+    nyra_exception_handler,
+)
+
+app.middleware("http")(logging_middleware)
 
 app.include_router(api_router)
 
@@ -25,3 +37,11 @@ def root():
     return {
         "message": f"Welcome to {settings.APP_NAME} 🚀"
     }
+
+
+@app.get("/error")
+def error():
+    raise NYRAException(
+        "This is a test exception.",
+        status_code=500,
+    )
