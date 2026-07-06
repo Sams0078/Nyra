@@ -92,3 +92,5 @@
 2026-07-07 00:51:14,918 | INFO | NYRA | GET / | 200 | 0.0009 sec
 2026-07-07 00:51:15,142 | INFO | NYRA | Root endpoint accessed
 2026-07-07 00:51:15,143 | INFO | NYRA | GET / | 200 | 0.0007 sec
+2026-07-07 00:56:28,613 | INFO | NYRA | NYRA Server Started Successfully
+2026-07-07 01:00:05,436 | INFO | NYRA | NYRA Server Started Successfully

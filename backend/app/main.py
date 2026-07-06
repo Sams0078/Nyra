@@ -8,6 +8,7 @@ from app.core.exceptions import (
     nyra_exception_handler,
 )
 from app.core.logging import logger
+from app.schemas.response import APIResponse
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -30,14 +31,15 @@ async def startup():
     logger.info("NYRA Server Started Successfully")
 
 
-@app.get("/")
+@app.get("/", response_model=APIResponse)
 def root():
     logger.info("Root endpoint accessed")
 
-    return {
-        "message": f"Welcome to {settings.APP_NAME} 🚀"
-    }
-
+    return APIResponse(
+        success=True,
+        message=f"Welcome to {settings.APP_NAME} 🚀",
+        data=None,
+    )
 
 @app.get("/error")
 def error():
